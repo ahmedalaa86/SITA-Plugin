@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ICM Client Build" default="all" basedir=".">
+
+<target name="clean">
+	<delete>
+		<fileset dir=".">
+			<include name="*.jar" />
+		</fileset>
+	</delete>	
+</target>
+
+<target name="buildPlugin">
+	<javac destdir="./bin" srcdir="./src" source="1.5" target="1.5" debug="on">
+		<classpath>
+			<pathelement location="./lib/nexus.jar" />
+			<pathelement location="./lib/j2ee.jar" />
+			<pathelement location="./lib/JSON4J_Apache.jar" />
+			<pathelement location="./lib/poi-3.15.jar" />
+			<pathelement location="./lib/commons-codec-1.10.jar" />
+			<pathelement location="./lib/commons-collections4-4.1.jar" />
+			<pathelement location="./lib/commons-logging-1.2.jar" />
+			<pathelement location="./lib/junit-4.12.jar" />
+			<pathelement location="./lib/log4j-1.2.17.jar" />
+		</classpath>
+	</javac>
+	<copy todir="./bin" overwrite="yes">
+		<fileset dir="./src">
+			<include name="hk/com/sita/WebContent/**/*.*" />
+		</fileset>
+	</copy>		
+	<jar destfile="./sitaPlugin.jar" manifest="./src/META-INF/MANIFEST.MF" update="true">
+		<fileset dir="./bin">
+			<include name="**/*.*" />
+		</fileset>
+	</jar>
+</target>
+
+
+<target name="all" depends="clean,buildPlugin"></target>
+</project>

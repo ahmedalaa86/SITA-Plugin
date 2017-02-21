@@ -1,0 +1,184 @@
+<div style="width: 100%;overflow-x:auto;overflow-y:auto; height: 50%">
+	<div data-dojo-type="dijit/layout/TabContainer" style="width: 100%; height: 100%;" data-dojo-attach-point="mainTabs">
+		<div data-dojo-type="dijit/layout/ContentPane" title="Filing Information" data-dojo-props="selected:true" data-dojo-attach-point="fillingsTab">
+			<input name="txtFormSaved" data-dojo-attach-point="txtFormSaved" type='hidden'/>
+			<!--<div  data-dojo-attach-point="contextualMenuStore"></div>
+			<text data-dojo-attach-point="contextualMenuTargetRefPoint">RightClickMeForShowingContextualMenu</text>-->
+			<div style="overflow-x:auto;overflow-y:auto;width:400px;height:180px;">
+				<div data-dojo-type="dojox.grid.DataGrid" data-dojo-attach-point="docsDataGrid" data-dojo-props="rowSelector:'20px'">
+				</div>
+			</div>
+		</div>
+		<div data-dojo-type="dijit/layout/ContentPane" title="Job Properties" data-dojo-props="selected:true" data-dojo-attach-point="popsTab">
+			<div data-dojo-type="dijit/layout/TabContainer" style="width: 100%; height: 90%;" data-dojo-attach-point="propsTabs">
+				<div data-dojo-type="dijit/layout/ContentPane" title="Non Multiple" data-dojo-props="selected:true" data-dojo-attach-point="nonMultipleTab">
+					<div style="overflow:auto;overflow-y:auto;padding: 0;height: 90%">
+						<table>
+							<tr VALIGN=TOP>
+								<td>
+									<table>
+										<tr>
+											<td>
+												Business Unit
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtBusinessUnit"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtBusinessUnit"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Location Name
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtLocationName" 
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtLocationName"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Invoice Number
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtInvoiceNumber" 
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtInvoiceNumber"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Invoice Date
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtInvoiceDate" 
+												data-dojo-type="dijit/form/TextBox" 
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtInvoiceDate"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Supplier Number
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtSupplierNumber"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtSupplierNumber"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Supplier Name
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtSupplierName"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtSupplierName"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Procurement Type
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtProcurementType"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtProcurementType"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td>
+									<table>
+										<tr>
+											<td>
+												Document Amount
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtDocumentAmount"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtDocumentAmount"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												PO Number
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtPONumber"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtPONumber"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Currency
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtCurrency" value="Yes"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtCurrency"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Currency Rate
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtCurrencyRate" value="Yes"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtCurrencyRate"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Description Header
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtDescriptionHeader" value="Yes"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtDescriptionHeader"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Budgeted
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtBudgeted" value="Yes"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtBudgeted"/>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Close Status
+											</td>
+											<td colspan="3">
+												<input type="text" name="txtCloseStatus" value="Yes"
+												data-dojo-type="dijit/form/TextBox"
+												data-dojo-props="trim:true, propercase:true" data-dojo-attach-point="txtCloseStatus"/>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane" title="Multiple" data-dojo-props="selected:true" data-dojo-attach-point="multipleTab">
+					<div style="overflow:auto;overflow-y:auto;padding: 0;height: 90%">
+						<button data-dojo-type="dijit/form/Button" type="button" data-dojo-attach-point="btnAddRow">Add</button>
+						<button data-dojo-type="dijit/form/Button" type="button" data-dojo-attach-point="btnDeleteRow">Delete</button>
+						<div style="overflow-x:auto;overflow-y:auto;width:600px;height:180px;">
+							<div data-dojo-type="dojox.grid.DataGrid" data-dojo-attach-point="propsDataGrid" data-dojo-props="rowSelector:'20px'">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

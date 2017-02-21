@@ -1,0 +1,22 @@
+{
+    "Name":"sita custom widget package",
+    "Description":"sita custom widget package",
+    "Locale":"",
+    "Version":"1.0",
+    "Categories":[
+        {
+            "id":"sitaWidgets",
+            "title":"SITA Widgets"
+        }
+    ],
+    "Widgets":[
+		{
+		    "id": "MainWidget",
+		    "title": "Main Widget",
+		    "category": "sitaWidgets",
+		    "description": "The Main Widget that contains 3 taps",
+		    "definition": "MainWidget.json",
+		    "runtimeClassName": "hk.com.sita.widgets.MainWidget.MainWidget"
+		}
+	]
+}
