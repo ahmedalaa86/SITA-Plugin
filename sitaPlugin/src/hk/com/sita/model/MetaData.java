@@ -16,6 +16,22 @@ public class MetaData {
 	private String allocationAmount;
 	private String descriptionLine;
 	private String reportAmount;
+	private String supplierName;
+	private String caseId;
+	
+	
+	public String getCaseId() {
+		return caseId;
+	}
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+	public String getSupplierName() {
+		return supplierName;
+	}
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
 	public String getAccountCode() {
 		return accountCode;
 	}

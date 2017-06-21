@@ -8,6 +8,7 @@
  *******************************************************************************/
 package hk.com.sita;
 
+import hk.com.sita.features.ReportFeature;
 import hk.com.sita.services.DeleteMetaDataByIdService;
 import hk.com.sita.services.GetAllMetaDataService;
 import hk.com.sita.services.GetMetaDataByIDService;
@@ -15,11 +16,12 @@ import hk.com.sita.services.GetMetaDataByInvoiceNumberService;
 import hk.com.sita.services.InsertMetaDataService;
 import hk.com.sita.services.ReadLookupsService;
 import hk.com.sita.services.UpdateMetaDataService;
+import hk.com.sita.services.ValidateLookupValue;
 
 import java.util.Locale;
 
 import com.ibm.ecm.extension.Plugin;
-import com.ibm.ecm.extension.PluginAction;
+import com.ibm.ecm.extension.PluginFeature;
 import com.ibm.ecm.extension.PluginService;
 
 public class SITAPlugin extends Plugin {
@@ -36,7 +38,7 @@ public class SITAPlugin extends Plugin {
 
 	@Override
 	public String getVersion() {
-		return "2.0";
+		return "3.0";
 	}
 
 	@Override
@@ -61,11 +63,16 @@ public class SITAPlugin extends Plugin {
 		        new GetAllMetaDataService(),    new GetMetaDataByInvoiceNumberService(),
 				new GetMetaDataByIDService(),   new UpdateMetaDataService(),
 				new DeleteMetaDataByIdService(),new InsertMetaDataService(),
-				new ReadLookupsService()
+				new ReadLookupsService(), new ValidateLookupValue()
 
 		};
 	}
-
+	
+	@Override
+    public PluginFeature[] getFeatures() {
+       return new  PluginFeature[] {new ReportFeature()};
+       
+    }
 	
 
 }

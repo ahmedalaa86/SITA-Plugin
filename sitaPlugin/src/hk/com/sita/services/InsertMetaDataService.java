@@ -33,7 +33,9 @@ public class InsertMetaDataService extends PluginService {
 		String invoiceNumber = request
 				.getParameter(Constants.COL_INVOICE_NUMBER);
 		String reportAmount = request.getParameter(Constants.COL_REPORT_AMOUNT);
-
+		String supplierName=request.getParameter(Constants.COL_SUPPLIER_NAME);
+		String caseId=request.getParameter(Constants.COL_CASE_ID);
+		
 		MetaData data = new MetaData();
 
 		data.setAccountCode(accountCode);
@@ -43,7 +45,9 @@ public class InsertMetaDataService extends PluginService {
 		data.setInvoiceNumber(invoiceNumber);
 		data.setReportAmount(reportAmount);
 		data.setDescriptionLine(descriptionLine);
-
+		data.setSupplierName(supplierName);
+		data.setCaseId(caseId);
+		
 		PrintWriter responseWriter = response.getWriter();
 
 		DatabaseUtils database = new DatabaseUtils();
@@ -51,18 +55,21 @@ public class InsertMetaDataService extends PluginService {
 		database.connect();
 
 		System.out.println("id" + id);
-
+		int auto_id=0;
 		if (id != null) {
 			data.setId(Integer.parseInt(id));
 			isSucceeded = database.updateMetadataRecord(data);
 
 		} else {
-			isSucceeded = database.insertMetadataRecord(data);
+			auto_id = database.insertMetadataRecord(data);
+			if(auto_id!=-1)
+				isSucceeded=true;
 		}
 		database.disconnect();
 
 		JSONObject object = new JSONObject();
 		object.put("Result", isSucceeded);
+		object.put("Id", auto_id);
 
 		responseWriter.print(object);
 

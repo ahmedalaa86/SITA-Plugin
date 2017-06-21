@@ -23,12 +23,14 @@ public class GetMetaDataByInvoiceNumberService extends PluginService {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String invoiceNumber=request.getParameter(Constants.COL_INVOICE_NUMBER);
+		//String supplierName=request.getParameter(Constants.COL_SUPPLIER_NAME);
+		String caseId=request.getParameter(Constants.COL_CASE_ID);
 		PrintWriter responseWriter = response.getWriter();
 		JSONArray jsonArray = new JSONArray();
 
 		DatabaseUtils database = new DatabaseUtils();
 		database.connect();
-		ArrayList<MetaData> metaList = database.selectRecordByInvoiceNumber(invoiceNumber);
+		ArrayList<MetaData> metaList = database.selectRecordByInvoiceNumber(invoiceNumber,caseId);
 		database.disconnect();
 
 		for (int i = 0; i < metaList.size(); i++) {

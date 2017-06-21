@@ -22,7 +22,7 @@ import org.apache.poi.ss.usermodel.Row;
 import com.ibm.ecm.extension.PluginService;
 import com.ibm.ecm.extension.PluginServiceCallbacks;
 
-public class ReadLookupsService extends PluginService {
+public class ValidateLookupValue extends PluginService {
 
 	@Override
 	public void execute(PluginServiceCallbacks callback,
@@ -31,7 +31,7 @@ public class ReadLookupsService extends PluginService {
 
 		String propId = request.getParameter("id");
 		String propName = request.getParameter("name");
-		String output="";
+		boolean found=false;
 		try 
 		{
 			
@@ -54,13 +54,7 @@ public class ReadLookupsService extends PluginService {
 
 			
 			
-			
-			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-			File file=new File("/lookups.xls");
-			System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-			System.out.println(file.getAbsolutePath());
-			FileInputStream fin = new FileInputStream(file);
-
+		
 			//Get the workbook instance for XLS file
 			HSSFWorkbook workbook = new HSSFWorkbook(docStream);
 			int sheetNumber=0;
@@ -69,15 +63,8 @@ public class ReadLookupsService extends PluginService {
 			int valueIndex=1;
 			int value2Index=2;
 			//Get first sheet from the workbook
-			if("location".equals(propName)){
-				sheetNumber=1;
-				keyIndex=1;
-				valueIndex=2;
-				sheetName="location";
-			} else if("supplier".equals(propName)){
-				sheetNumber=2;
-				sheetName="supplier";
-			} else if("account".equals(propName)){
+		
+			if("account".equals(propName)){
 				sheetNumber=3;
 				sheetName="acc. code";
 			} else if("allocation_code".equals(propName)){
@@ -98,23 +85,17 @@ public class ReadLookupsService extends PluginService {
 			    String value2="";
 			    try{
 			    	key = row.getCell(keyIndex).getStringCellValue();
-			    	value = row.getCell(valueIndex).getStringCellValue();
-			    	if("supplier".equals(propName))
-			    		value2 = row.getCell(value2Index).getStringCellValue();
 			    }
 			    catch(Exception ex){
 			    	System.out.println("Ignoring Row");
 			    }
 			    
 			    if(propId.equalsIgnoreCase(key)){
-			    	output=value;
-			    	if(!"".equals(value2)){
-			    		output+=("|"+value2);	
-			    	}
+			    	found=true;
 			    	break;
 			    }
 			}
-			fin.close();
+			docStream.close();
 
 		}
 
@@ -135,7 +116,7 @@ public class ReadLookupsService extends PluginService {
 		PrintWriter responseWriter = response.getWriter();
 		
 		JSONObject object = new JSONObject();
-		object.put("Result", output);
+		object.put("Result", found);
 		responseWriter.print(object);
 
 	}
@@ -143,7 +124,7 @@ public class ReadLookupsService extends PluginService {
 	@Override
 	public String getId() {
 		// TODO Auto-generated method stub
-		return "ReadLookupsService";
+		return "ValidateLookupValue";
 	}
 
 }

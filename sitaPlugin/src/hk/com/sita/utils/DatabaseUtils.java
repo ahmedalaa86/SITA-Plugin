@@ -90,15 +90,16 @@ public class DatabaseUtils {
 
 	}
 
-	public ArrayList<MetaData> selectRecordByInvoiceNumber(String invoiceNumber)
+	public ArrayList<MetaData> selectRecordByInvoiceNumber(String invoiceNumber,String caseId)
 
 	{
 		String query = "Select * from " + Constants.TABLE_NAME + " Where \""
-				+ Constants.COL_INVOICE_NUMBER + "\" = '" + invoiceNumber + "'";
+				+ Constants.COL_INVOICE_NUMBER + "\" = '" + invoiceNumber + "' and \""+Constants.COL_CASE_ID+"\" = '"+caseId+"'";
 		ArrayList<MetaData> metadataRecords = new ArrayList<MetaData>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
+			System.out.println("$#&&&&&&&$$$$$$$$$$$$$$$$ Query is : "+query);
 			stmt = dbConnection.prepareStatement(query);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -218,32 +219,37 @@ public class DatabaseUtils {
 
 	}
 
-	public boolean insertMetadataRecord(MetaData metadata) {
-		String query = "insert into " + Constants.TABLE_NAME + "(\"Invoice_Number\", \"Allocation_Code\", \"Account_Code\", \"Analysis_Code\", \"FC_Allocation_Amount\", \"Description_Line\",\"Report_Amount\") values (" + "'"
+	public int insertMetadataRecord(MetaData metadata) {
+		String query = "insert into " + Constants.TABLE_NAME + "(\"Invoice_Number\", \"Allocation_Code\", \"Account_Code\", \"Analysis_Code\", \"FC_Allocation_Amount\", \"Description_Line\",\"Report_Amount\",\"Case_Id\") values (" + "'"
 				+ metadata.getInvoiceNumber() + "'," + "'"
 				+ metadata.getAllocationCode() + "'," + "'"
 				+ metadata.getAccountCode() + "'," + "'"
 				+ metadata.getAnalysisCode() + "'," + "'"
 				+ metadata.getAllocationAmount() + "'," + "'"
 				+ metadata.getDescriptionLine() + "'," + "'"
-				+ metadata.getReportAmount() + "'" + ")";
+				+ metadata.getReportAmount() + "'," + "'" 
+				+ metadata.getCaseId() + "'"+ ")"; 
 
 		System.err.println("############################################ "+query);
 		PreparedStatement stmt = null;
+		int auto_id=0;
 		try {
 
-			stmt = dbConnection.prepareStatement(query);
+			stmt = dbConnection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+		    rs.next();
+		    auto_id = rs.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return false;
+			return -1;
 		} finally {
 
 			closeResource(stmt);
 
 		}
-		return true;
+		return auto_id;
 	}
 
 	public boolean deleteMetaDataRecord(String id) {
